@@ -1,0 +1,16 @@
+Question 2-1 : 
+The Pros:
+-The loop of the treatment and the test is simple and does not require a lot of coding, simple to process 
+-Require a small amount of memory 
+The Cons:
+-We involve in the testing process only 4 pixels surrounding a tested pixel 
+-less accuracy in detecting nosie 
+ 
+Question 2-2:
+The Pros:
+-Involving all the surrounding pixels in the testing process of a tested pixels
+-More accuracy and efficiency in detecting noise 
+-Replacing the pixel that contains noise is more compatible pixel 
+The Cons:
+-The loop of the treatment is more complexe and contain an extra function (sorting function to sort the pixels surround the tested pixel)
+-More coding lines thus more memory allocation for this program.
