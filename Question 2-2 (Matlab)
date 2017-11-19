@@ -1,0 +1,42 @@
+clc
+clear all
+close all
+% Read an image(test.png is a default picture in the matlab documents , you can try to upload and test any other picture )
+image= imread('test.png');
+% turn the image into a grayscale
+I = rgb2gray(image);
+A = rgb2gray(image);
+% get the dimension of the picture 
+[r,c]=size(I);
+for i = 2:r-1
+    for j = 2:c-1
+        % store the value of the pixel
+        pixel = I(i,j);
+         % store the averege value of the surrounding nine pixels mean2 is a calculating average function(a predefined a function)
+       
+        moy = mean2(I(i-1:i+1,j-1:j+1));
+        % test if it is too different
+        if(pixel-moy > 10) | (moy-pixel <10)
+            % create an array that contains the surrounding pixels
+            Array = [I(i-1,j-1) ;I(i-1,j); I(i-1,j+1); I(i,j+1); I(i,j-1); I(i+1,j-1); I(i+1,j+1); I(i+1,j); I(i,j)];
+            % sort the array ( a predefined function)
+            sort(Array);
+            test = 0;
+            %removing Two pixels with lower brightness. Two pixels with the higher brightness : automatically by sorting the array 
+            for k = 3:7
+                test = test + Array(k);
+            end
+             %replace the original brightness with the average of the 5 pixels left after
+          
+            I(i,j) = test/5;
+        end
+        
+    end
+end
+
+% display the original image
+figure('name','original')
+imshow(A)
+%display the modified image 
+figure('name','modified image')
+imshow(I)
