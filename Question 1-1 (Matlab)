@@ -1,0 +1,20 @@
+clc
+clear all
+close all
+% the dimensions of hte  image %
+r =30;
+c =30;
+
+%for this example let's consider that 1pixel equal to 3 mm to facilitate coloring process
+for i = 1:r
+    for j = 1:c
+        if mod(floor((j-1)/3),2)
+            A(i,j) = 255;
+        else
+            A(i,j) = 0;
+        end
+        
+    end
+end
+% display the image
+subimage(A);
