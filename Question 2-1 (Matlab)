@@ -1,0 +1,33 @@
+clc
+clear all
+close all
+% Read an image to do the noise test on it 
+%in this case the test.png is an image from Matlab defualts picture you can upload any picture and test it 
+image = imread('test.png');
+% convert the image from a RBG colored image into a grayscaled image (2 version one origian and one we will modify)
+A = rgb2gray(image);
+I = rgb2gray(image);
+% get the dimension of the image 
+[r,c]=size(I);
+
+%we go through each pixel ( we avoid pixels on the border of the picture )
+for i = 2:r-1
+    for j = 2:c-1
+        % get the value of the tested pixel
+        pixel= I(i,j);
+        % store the average value of the surrounding four pixels brightness
+        moy = (I(i-1,j)+I(i,j-1)+I(i+1,j)+I(i,j+1))/4;
+        % test if it is too different(noise test)
+        if( pixel-moy> 10) || (moy-pixel>  10)
+            % replace the its original brightness with the average brightness of the surrounding four pixel.
+            I(i,j) = moy;
+        end
+        
+    end
+end
+% display the original image
+figure('name','original')
+imshow(A)
+%display the modified image 
+figure('name','modified image')
+imshow(I)
