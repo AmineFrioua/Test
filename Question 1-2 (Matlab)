@@ -1,0 +1,47 @@
+clc
+clear all
+close all
+% define the number of row and column
+prompt='insert the lenth of the image';
+r=input(prompt);
+prompt='insert the width of the image';
+c=input(prompt);
+
+%check if the r and c are even, if so we add one pixel to avoid the border conditions in the code
+if mod(r,2)==0
+r=r+1;
+end
+if mod(c,2)==0
+c=c+1;
+end
+
+% creating a matrix of zeros (we'll be working on this matrix)
+A = zeros(r,c);
+% define a scaling to increase the brightness in the for loop
+scale= 3.14/(2*(r+c));
+% now we'll fill 
+for i= 1:r
+    % apply the cosine wave in the first column and last column
+    A(i,1) = cos((1+i)*scale);
+    A(i,c) =cos((c+i)*scale);
+end
+
+for j= 1:c
+    % apply the cosine wave in the first and last row 
+    A(1,j) = cos((1+j)*scale);
+    A(r,j) = cos((r+j)*scale);
+end
+
+% fill the rest of the matrix
+for i = 2:r-1
+    for j =2:c-1
+        if ((mod(i,2) == 0)&&(mod(j,2) == 0))
+            A(i,j) = 1;
+        else
+            A(i,j) =cos((i+j)*scale);
+            
+        end
+    end
+end
+% displaying the image
+subimage(A);
